@@ -29,3 +29,5 @@ class post(models.Model):
     dislikes = models.IntegerField(default=0)
     comments = models.IntegerField(default=0)
     PersonId = models.ForeignKey(Person, on_delete=models.CASCADE, default=None, blank=True)
+    lflag = models.BooleanField(default=False)
+    dflag = models.BooleanField(default=False)

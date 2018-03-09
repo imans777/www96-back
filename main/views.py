@@ -153,12 +153,24 @@ def like(request):
             id= data['id']
             npos= post.objects.get(id= id)
             if like:
-                npos.like += 1
+                if npos.lflag == False:
+                    npos.like += 1
+                    st = 200
+                else:
+                    npos.like -= 1
+                    st = 500
+                npos.lflag = not npos.lflag
             else:
-                npos.dislike +=1
+                if npos.dflag == False:
+                    npos.dislike +=1
+                    st = 200
+                else:
+                    npos.dislike -=1
+                    st = 500
+                npos.dflag = not npos.dflag
             npos.save()
 
         except Exception as e:
             return HttpResponse( e, status=500)
         else:
-            return HttpResponse("like or dislike added", status=200)
+            return HttpResponse("like or dislike added", status=st)

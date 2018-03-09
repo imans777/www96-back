@@ -1,10 +1,18 @@
 from django.db import models
 
 # Create your models here.
-
+FIELDS = (
+    # ('dataBase value, Human readable value)
+    ('EC','EC'),
+    ('CE', 'CE'),
+    ('EE', 'EE'),
+)
 
 class Person(models.Model):
-    username=models.CharField(max_length=30)
-    email=models.EmailField()
-    password=models.CharField(max_length=40)
-    usernumber=models.BigIntegerField(max_length=9)
+
+
+    username=models.CharField(max_length=30, unique=True, blank=False)
+    email=models.EmailField(blank=False)
+    password=models.CharField(max_length=40, blank=False)
+    usernumber=models.BigIntegerField(max_length=9, blank=False)
+    field = models.CharField(max_length= 10, choices=FIELDS, blank=False)

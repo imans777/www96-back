@@ -142,7 +142,6 @@ def update(request):
         else:
             return HttpResponse("user was valid", status=200)
 
-
 def like(request):
     if request.method == 'POST':
         try:

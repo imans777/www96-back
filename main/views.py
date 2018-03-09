@@ -115,3 +115,29 @@ def checkUser(request):
             return HttpResponse( e, status=500)
         else:
             return HttpResponse("user was valid", status=200)
+
+def update(request):
+    if request.method == 'POST':
+        try:
+            print(type(request.body.decode('utf-8')), "Fuck this shittttttttttttttttttttttttttttttttttttttttttttttttttt")
+
+            data = (json.loads(request.body.decode('utf-8')))
+            username = data['username']
+            password = data['password']
+            field = data['field']
+            print(field, "Fuck yooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
+            email = data['email']
+            stdNumber = data['student_id']
+            pers = Person.objects.get(email = email)
+            if pers is None:
+                raise Exception("invalid user")
+            pers.username = username
+            pers.password = password
+            pers.field = field
+            pers.stdNumber = stdNumber
+            pers.save()
+            # print(pers.field, "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
+        except Exception as e:
+            return HttpResponse( e, status=500)
+        else:
+            return HttpResponse("user was valid", status=200)

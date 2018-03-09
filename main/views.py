@@ -8,8 +8,8 @@ class home(APIView):
     def get(self, request):
         return render(request, 'index.html')
 
-# class temp(APIView):
-    # def get(self, request):
-
+class temp(APIView):
+    def get(self, request):
+    	return Response({"data": "hi"})
         # return Response()
 

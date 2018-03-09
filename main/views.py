@@ -79,7 +79,7 @@ class getUserSerializer(generics.ListAPIView):
 #     user = Person.objects.get(userName=userName)
 #     return HttpResponse({""})
 
-
+@csrf_exempt
 def addPost(request):
     if request.method == 'POST':
         # return  HttpResponse(request.body)

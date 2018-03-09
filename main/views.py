@@ -88,9 +88,30 @@ def addPost(request):
 
             data = (json.loads(request.body.decode('utf-8')))
             text = data['text']
-            npost = post(text=text)
-            npost.save()
+            print(text, "ffffffffffffffffffffffffffffffffffffffffff")
+            npost = post(text=text, PersonId= Person.objects.All()[0], likes= 0, dislikes=0, comments=0)
+            npost.save()    
         except Exception as e:
-            return HttpResponse("error:", e)
+            return HttpResponse( e)
         else:
             return HttpResponse("user Added")
+    return HttpResponse("invalid request")
+
+@csrf_exempt
+def checkUser(request):
+    if request.method == 'POST':
+        try:
+            print(type(request.body.decode('utf-8')), "Fuck this shittttttttttttttttttttttttttttttttttttttttttttttttttt")
+
+            data = (json.loads(request.body.decode('utf-8')))
+            username = data['username']
+            password = data['password']
+            pers = Person.objects.get(username=username, password=password)
+            if pers is None:
+                raise Exception("invalid user")
+            print(pers.field, "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
+            pers.save()
+        except Exception as e:
+            return HttpResponse( e, status=500)
+        else:
+            return HttpResponse("user was valid", status=200)

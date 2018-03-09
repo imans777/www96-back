@@ -7,6 +7,7 @@ urlpatterns = [
     # url(r'^getUser', views.getUser, name='temp'),
     url(r'^api/profile/(?P<userName>.+)', views.getUserSerializer.as_view(), name='temp'),
     url(r'^api/addPost/', views.addPost, name='temp'),
+    url(r'^api/login/', views.checkUser, name='temp'),
     url(r'^', views.home.as_view(), name='home'),
 
 

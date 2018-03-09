@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from django.shortcuts import render
 from .serializers import PersonSerializer
 from django.views.decorators.csrf import csrf_exempt
-from .models import Person
+from .models import Person, post
 import json
 from django.http import HttpResponse
 from django.http import  JsonResponse
@@ -71,3 +71,19 @@ class getUserSerializer(generics.ListAPIView):
 # def getUser(request, userName):
 #     user = Person.objects.get(userName=userName)
 #     return HttpResponse({""})
+
+
+def addPost(request):
+    if request.method == 'POST':
+        # return  HttpResponse(request.body)
+        try:
+            print(type(request.body.decode('utf-8')), "Fuck this shittttttttttttttttttttttttttttttttttttttttttttttttttt")
+
+            data = (json.loads(request.body.decode('utf-8')))
+            text = data['text']
+            npost = post(text=text)
+            npost.save()
+        except Exception as e:
+            return HttpResponse("error:", e)
+        else:
+            return HttpResponse("user Added")

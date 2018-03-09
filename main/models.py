@@ -25,7 +25,7 @@ class Person(models.Model):
 class post(models.Model):
     id = models.AutoField(primary_key=True)
     text = models.TextField()
-    likes = models.IntegerField()
-    dislikes = models.IntegerField()
-    comments = models.IntegerField()
-    PersonId = models.ForeignKey(Person, on_delete=models.CASCADE)
+    likes = models.IntegerField(default=0)
+    dislikes = models.IntegerField(default=0)
+    comments = models.IntegerField(default=0)
+    PersonId = models.ForeignKey(Person, on_delete=models.CASCADE, default=None, blank=True)

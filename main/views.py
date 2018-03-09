@@ -141,3 +141,24 @@ def update(request):
             return HttpResponse( e, status=500)
         else:
             return HttpResponse("user was valid", status=200)
+
+
+def like(request):
+    if request.method == 'POST':
+        try:
+            print(type(request.body.decode('utf-8')), "Fuck this shittttttttttttttttttttttttttttttttttttttttttttttttttt")
+
+            data = (json.loads(request.body.decode('utf-8')))
+            like = data['like']
+            id= data['id']
+            npos= post.objects.get(id= id)
+            if like:
+                npos.like += 1
+            else:
+                npos.dislike +=1
+            npos.save()
+
+        except Exception as e:
+            return HttpResponse( e, status=500)
+        else:
+            return HttpResponse("like or dislike added", status=200)

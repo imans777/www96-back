@@ -31,3 +31,8 @@ class post(models.Model):
     PersonId = models.ForeignKey(Person, on_delete=models.CASCADE, default=None, blank=True)
     lflag = models.BooleanField(default=False)
     dflag = models.BooleanField(default=False)
+
+class report(models.Model):
+    postId = models.ForeignKey(post, on_delete=models.CASCADE, default=None, blank=True)
+    number = models.IntegerField(default=0)
+

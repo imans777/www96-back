@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^api/login/', views.checkUser, name='temp'),
     url(r'^api/update/', views.update, name= 'temp'),
     url(r'^api/like', views.like, name= 'temp'),
+    url(r'^api/report', views.report, name= 'temp'),
     url(r'^', views.home.as_view(), name='home'),
 
 

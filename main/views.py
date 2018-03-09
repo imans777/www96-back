@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from django.shortcuts import render
 from .serializers import PersonSerializer
 from django.views.decorators.csrf import csrf_exempt
-from .models import Person, post
+from .models import Person, post, report
 import json
 from django.http import HttpResponse
 from django.http import  JsonResponse
@@ -174,3 +174,22 @@ def like(request):
             return HttpResponse( e, status=500)
         else:
             return HttpResponse("like or dislike added", status=st)
+
+
+def report(request):
+    if request.method == 'POST':
+        try:
+            data = (json.loads(request.body.decode('utf-8')))
+            id = data['id']
+            rep = report.objects.get(postId = post.objects.get(id = id))
+
+            if rep is None:
+                raise Exception("invalid user")
+
+            rep.number += 1
+            rep.save()
+            # print(pers.field, "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
+        except Exception as e:
+            return HttpResponse( e, status=500)
+        else:
+            return HttpResponse("report saved", status=200)

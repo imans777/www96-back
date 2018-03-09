@@ -12,6 +12,13 @@ from django.http import  JsonResponse
 from .models import FIELDS
 
 # Create your views here.
+
+class home(APIView):
+    def get(self, request):
+        return render(request, 'index.html')
+
+
+        
 @csrf_exempt
 def loginPage(request):
     if request.method == 'GET':

@@ -8,11 +8,24 @@ FIELDS = (
     ('EE', 'EE'),
 )
 
+
+
 class Person(models.Model):
-
-
     username=models.CharField(max_length=30, unique=True, blank=False)
     email=models.EmailField(blank=False)
     password=models.CharField(max_length=40, blank=False)
     usernumber=models.BigIntegerField(max_length=9, blank=False)
     field = models.CharField(max_length= 10, choices=FIELDS, blank=False)
+    avatar = models.ImageField(upload_to= 'image', blank=True)
+
+
+
+
+
+class post(models.Model):
+    id = models.AutoField(primary_key=True)
+    text = models.TextField()
+    likes = models.IntegerField()
+    dislikes = models.IntegerField()
+    comments = models.IntegerField()
+    PersonId = models.ForeignKey(Person, on_delete=models.CASCADE)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Person
+from .models import Person, post
 # Register your models here.
 
 # class PersonAdminPage(admin.ModelAdmin)
@@ -7,3 +7,4 @@ from .models import Person
 
 
 admin.site.register(Person)
+admin.site.register(post)

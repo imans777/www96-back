@@ -1,5 +1,5 @@
 """wwwback URL Configuration
-
+from django.conf.urls.static import static
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.0/topics/http/urls/
 Examples:
@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    url(r'^/api', include('main.urls'), name='main'),
-]
+    url('admin/', admin.site.urls),
+    url(r'^api/', include('main.urls'), name='main'),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

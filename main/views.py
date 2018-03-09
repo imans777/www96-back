@@ -1,7 +1,9 @@
+from rest_framework import generics, views
 from rest_framework.renderers import JSONRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import render
+from .serializers import PersonSerializer
 from django.views.decorators.csrf import csrf_exempt
 from .models import Person
 import json
@@ -51,3 +53,21 @@ def getType(request):
     somedict = {"fields": [(y) for x, y in FIELDS]}
     print(somedict, "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
     return HttpResponse(json.dumps(somedict))
+
+
+class getUserSerializer(generics.ListAPIView):
+    # permission_classes = (AllowAny,)
+    serializer_class = PersonSerializer
+
+    def get_queryset(self):
+        userName= self.kwargs['userName']
+        print(userName, "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
+        # user = Person.objects.get(userName=userName)
+        queryset = Person.objects.filter(username = userName)
+        return queryset
+
+
+
+# def getUser(request, userName):
+#     user = Person.objects.get(userName=userName)
+#     return HttpResponse({""})
